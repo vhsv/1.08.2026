@@ -1,0 +1,263 @@
+:root{
+  --album:   #241811;
+  --album2:  #2f2013;
+  --paper:   #f4ead4;
+  --paper2:  #ece0c4;
+  --ink:     #35281c;
+  --ink-soft:#5c4a37;
+  --gold:    #c8a24b;
+  --gold-lt: #e4c877;
+  --rust:    #8a3b28;
+  --pine:    #3c5241;
+  --tape:    #e9dcc0cc;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at 20% -10%, #3a2818 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, #3a2818 0%, transparent 45%),
+    var(--album);
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0px, transparent 1px, transparent 3px);
+  pointer-events:none;
+  z-index:1000;
+}
+h1,h2,.script{font-family:'Fraunces', serif;}
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8vh 6vw 10vh;
+  color:var(--paper);
+}
+.hero .eyebrow{
+  font-family:'Caveat', cursive;
+  font-size:clamp(1.3rem, 2.4vw, 1.8rem);
+  color:var(--gold-lt);
+  letter-spacing:.02em;
+  margin-bottom:.4rem;
+  opacity:0;
+  animation:fadeUp .9s ease forwards .15s;
+}
+.hero .fifty{
+  font-size:clamp(6rem, 22vw, 13rem);
+  font-weight:700;
+  line-height:.85;
+  background:linear-gradient(180deg, var(--gold-lt), var(--gold) 55%, #9c7a2f);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  letter-spacing:-.02em;
+  text-shadow:0 6px 40px rgba(200,162,75,.25);
+  opacity:0;
+  animation:fadeUp 1s ease forwards .3s;
+}
+.hero h1{
+  margin:.6rem 0 0;
+  font-size:clamp(1.9rem, 5vw, 3.4rem);
+  font-weight:600;
+  font-style:italic;
+  line-height:1.15;
+  max-width:16ch;
+  opacity:0;
+  animation:fadeUp 1s ease forwards .5s;
+}
+.hero .sub{
+  margin-top:1.4rem;
+  max-width:38ch;
+  font-size:1.05rem;
+  color:#d9cbb0;
+  line-height:1.6;
+  opacity:0;
+  animation:fadeUp 1s ease forwards .7s;
+}
+.hero .scroll-hint{
+  margin-top:4rem;
+  font-size:.85rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#a8926e;
+  opacity:0;
+  animation:fadeUp 1s ease forwards .9s, bob 2.4s ease-in-out 1.9s infinite;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(18px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes bob{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(6px);}
+}
+.intro{
+  max-width:640px;
+  margin:0 auto;
+  padding:6vh 8vw 10vh;
+  text-align:center;
+}
+.intro p{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size:clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height:1.65;
+  color:var(--paper2);
+}
+.intro p span{color:var(--gold-lt); font-style:normal;}
+.album{
+  max-width:1120px;
+  margin:0 auto;
+  padding:2vh 5vw 10vh;
+  display:flex;
+  flex-direction:column;
+  gap:9vh;
+}
+.entry{
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  gap:1.6rem;
+  position:relative;
+}
+@media(min-width:800px){
+  .entry{grid-template-columns: 46% 54%; gap:3rem;}
+  .entry.reverse{grid-template-columns: 54% 46%;}
+  .entry.reverse .polaroid-wrap{order:2;}
+  .entry.reverse .caption-wrap{order:1;}
+}
+.polaroid-wrap{
+  display:flex;
+  justify-content:center;
+}
+.polaroid{
+  background:var(--paper);
+  padding:14px 14px 46px;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.25),
+    0 18px 34px rgba(0,0,0,.4);
+  max-width:340px;
+  width:100%;
+  position:relative;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.polaroid:hover{
+  transform:rotate(0deg) scale(1.025) !important;
+  box-shadow:0 4px 8px rgba(0,0,0,.3), 0 26px 44px rgba(0,0,0,.5);
+  z-index:5;
+}
+.polaroid img{
+  display:block;
+  width:100%;
+  height:auto;
+  filter:sepia(.16) saturate(1.05) contrast(1.02);
+}
+.polaroid .num{
+  position:absolute;
+  bottom:10px; right:16px;
+  font-family:'Caveat', cursive;
+  font-size:1.25rem;
+  color:var(--ink-soft);
+}
+.tape{
+  position:absolute;
+  width:70px; height:26px;
+  background:var(--tape);
+  top:-12px; left:50%;
+  transform:translateX(-50%) rotate(-3deg);
+  box-shadow:0 2px 4px rgba(0,0,0,.2);
+  z-index:2;
+}
+.caption-wrap{
+  max-width:480px;
+  margin:0 auto;
+}
+.caption-wrap .because{
+  font-family:'Caveat', cursive;
+  color:var(--gold-lt);
+  font-size:1.3rem;
+  display:block;
+  margin-bottom:.2rem;
+}
+.caption-wrap h2{
+  color:var(--paper);
+  font-size:clamp(1.35rem, 3vw, 1.9rem);
+  font-weight:600;
+  line-height:1.3;
+  margin:0 0 .6rem;
+}
+.caption-wrap p{
+  color:#c9b993;
+  font-size:1rem;
+  line-height:1.65;
+  margin:0;
+}
+.entry .mark{
+  color:var(--gold);
+}
+.closing{
+  position:relative;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(200,162,75,.08), transparent 60%);
+}
+.closing .script{
+  font-family:'Caveat', cursive;
+  font-size:clamp(2.4rem, 6vw, 4rem);
+  color:var(--gold-lt);
+  line-height:1.2;
+  max-width:20ch;
+  margin:0 auto 1.4rem;
+}
+.closing p{
+  color:#c9b993;
+  max-width:34ch;
+  margin:0 auto;
+}
+.closing .sign{
+  margin-top:2.6rem;
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  color:var(--paper);
+  font-size:1.2rem;
+  opacity:.85;
+}
+.divider{
+  width:60px; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:2.2rem auto;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.in{
+  opacity:1;
+  transform:translateY(0);
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important;}
+  .hero .eyebrow, .hero .fifty, .hero h1, .hero .sub, .hero .scroll-hint{opacity:1;}
+  .reveal{opacity:1; transform:none;}
+}
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--gold-lt);
+  outline-offset:3px;
+}
+.footer
+{
+    text-align: center;
+    color: var(--paper2);
+}
